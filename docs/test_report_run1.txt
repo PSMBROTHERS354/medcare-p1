@@ -1,0 +1,46 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.1.1, pluggy-1.6.0 -- /usr/bin/python3
+cachedir: .pytest_cache
+rootdir: /home/claude/medcare-p1/backend
+plugins: anyio-4.14.2
+collecting ... collected 23 items
+
+tests/test_p1.py::test_01_healthy_sku_monitors PASSED                    [  4%]
+tests/test_p1.py::test_02_flu_signal_increases_sensed_demand PASSED      [  8%]
+tests/test_p1.py::test_03_forecast_changes_between_baseline_and_sensed PASSED [ 13%]
+tests/test_p1.py::test_04_rop_increases_with_demand_and_lead_time PASSED [ 17%]
+tests/test_p1.py::test_05_transfer_feasible_flu_shortage PASSED          [ 21%]
+tests/test_p1.py::test_06_transfer_infeasible_replenishes PASSED         [ 26%]
+tests/test_p1.py::test_07_replenish_quantity_positive_and_reasonable PASSED [ 30%]
+tests/test_p1.py::test_08_near_expiry_batch_creates_expiry_risk PASSED   [ 34%]
+tests/test_p1.py::test_09_fefo_orders_batches_by_expiry_ascending PASSED [ 39%]
+tests/test_p1.py::test_10_chronic_understock_flagged PASSED              [ 43%]
+tests/test_p1.py::test_11_priority_and_review_cadence_present PASSED     [ 47%]
+tests/test_p1.py::test_12_cost_weighting_changes_cost_estimate PASSED    [ 52%]
+tests/test_p1.py::test_13_what_if_demand_increase_reduces_expiry_loss PASSED [ 56%]
+tests/test_p1.py::test_14_what_if_demand_change_recalculates_forecast_and_rop PASSED [ 60%]
+tests/test_p1.py::test_15_what_if_lead_time_change_recalculates_rop PASSED [ 65%]
+tests/test_p1.py::test_16_network_health_endpoint_reflects_real_data PASSED [ 69%]
+tests/test_p1.py::test_17_capacity_headroom_considered_in_network_search PASSED [ 73%]
+tests/test_p1.py::test_18_forecast_metrics_are_computed_not_hardcoded PASSED [ 78%]
+tests/test_p1.py::test_19_recommendation_completeness PASSED             [ 82%]
+tests/test_p1.py::test_20_api_rejects_invalid_sku PASSED                 [ 86%]
+tests/test_p1.py::test_20b_api_rejects_invalid_what_if_payload PASSED    [ 91%]
+tests/test_p1.py::test_21_all_core_endpoints_return_200 PASSED           [ 95%]
+tests/test_p1.py::test_22_what_if_endpoint_full_flow PASSED              [100%]
+
+=============================== warnings summary ===============================
+../../../../usr/local/lib/python3.12/dist-packages/fastapi/testclient.py:1
+  /usr/local/lib/python3.12/dist-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+tests/test_p1.py: 84 warnings
+  /usr/local/lib/python3.12/dist-packages/statsmodels/tsa/base/tsa_model.py:473: ValueWarning: No frequency information was provided, so inferred frequency D will be used.
+    self._init_dates(dates, freq)
+
+tests/test_p1.py::test_21_all_core_endpoints_return_200
+  /home/claude/medcare-p1/backend/app/main.py:36: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    return {"status": "ok", "service": "medcare-p1-api", "today": db.get_today(), "time": datetime.utcnow().isoformat(), "forecast_cache_size": cache.cache_size()}
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================= 23 passed, 86 warnings in 12.93s =======================

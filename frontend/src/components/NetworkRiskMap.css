@@ -1,0 +1,77 @@
+.risk-map-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.risk-map-svg {
+  width: 100%;
+  height: 320px;
+  background: linear-gradient(180deg, #fafcfd 0%, #f2f6f9 100%);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--card-border);
+}
+
+.risk-map-edge {
+  fill: none;
+  stroke: var(--teal-600);
+  stroke-width: 1.6;
+  stroke-dasharray: 4 3;
+  opacity: 0.75;
+}
+
+.risk-map-edge-label {
+  font-size: 9.5px;
+  fill: var(--text-secondary);
+  text-anchor: middle;
+  font-family: var(--font-mono);
+}
+
+.risk-map-node-label {
+  font-size: 11px;
+  font-weight: 600;
+  fill: var(--text-primary);
+  text-anchor: middle;
+  font-family: var(--font-display);
+}
+
+.risk-map-node-sub {
+  font-size: 9.5px;
+  fill: var(--text-muted);
+  text-anchor: middle;
+}
+
+.risk-map-legend {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 11.5px;
+  color: var(--text-secondary);
+  flex-wrap: wrap;
+}
+
+.risk-map-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.risk-map-legend i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.legend-line {
+  width: 16px !important;
+  height: 2px !important;
+  border-radius: 0 !important;
+  background: repeating-linear-gradient(90deg, var(--teal-600) 0 3px, transparent 3px 5px);
+}
+
+.legend-sep {
+  width: 1px;
+  height: 14px;
+  background: var(--card-border);
+}

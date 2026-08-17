@@ -1,0 +1,43 @@
+version: "3.9"
+
+# Practical local architecture: Frontend (static build, served by `serve`) →
+# Backend API (FastAPI/uvicorn) → SQLite + forecast cache (inside the
+# backend container, regenerated fresh on every start by docker-entrypoint.sh).
+#
+# NOTE ON VITE_API_BASE_URL: Vite bakes this into the frontend's JS bundle at
+# BUILD time, not at container runtime. The build args below point the
+# frontend at the backend container's published port (localhost:8000) for a
+# docker-compose-based local run. For a real multi-host deployment, rebuild
+# the frontend image with --build-arg VITE_API_BASE_URL=<real backend URL>
+# instead (see DEPLOYMENT.md).
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+      - ALLOWED_ORIGINS=http://localhost:5173,http://127.0.0.1:5173,http://localhost:4173
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_API_BASE_URL: http://localhost:8000
+    ports:
+      - "5173:5173"
+    environment:
+      - PORT=5173
+    depends_on:
+      - backend
+
+# This compose file has been reviewed for correctness but NOT run against a
+# live Docker daemon in the environment used to build this project (no
+# Docker available there). See DEPLOYMENT_STATUS.md for exactly what was and
+# wasn't verified, and DEPLOYMENT.md for the manual verification steps.

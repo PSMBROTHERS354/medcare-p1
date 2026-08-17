@@ -1,0 +1,20 @@
+.mon-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 900px) {
+  .mon-grid { grid-template-columns: 1fr; }
+}
+
+.mon-history-card table { font-size: 12px; }
+.mon-history-card { max-height: 480px; overflow-y: auto; }
+
+.mon-note {
+  margin-top: 16px;
+  font-size: 11.5px;
+  color: var(--text-muted);
+  font-style: italic;
+}
